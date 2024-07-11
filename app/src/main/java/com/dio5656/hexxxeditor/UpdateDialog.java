@@ -34,19 +34,15 @@ public class UpdateDialog extends DialogFragment {
                 .setNegativeButton("Download", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        System.out.println("dowwwwwwwwwwwwwwww");
                         String url = "https://github.com/dio5656/HexxxEditor/releases";
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(url));
-                      //  if (intent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(intent);
-                      //  }
-
+                        startActivity(intent);
                         dialog.dismiss();
                     }
                 });
 
         return builder.create();
 
-                }
+    }
     }

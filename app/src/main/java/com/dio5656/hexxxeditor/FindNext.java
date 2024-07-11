@@ -41,7 +41,7 @@ public class FindNext {
                 System.out.println("readdone="+readdone);
                 System.out.println("firsttry="+firsttry);
                 result="";
-                // readsize = 500; uncommmmmmmmmmmmmmmmmmmm
+                // readsize = 500;
                 readFromFile.start();
                 System.out.println("file is read");
 

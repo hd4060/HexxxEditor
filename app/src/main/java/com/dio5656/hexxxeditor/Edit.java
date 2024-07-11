@@ -35,7 +35,7 @@ public class Edit {
         // Create the PopupWindow
         int width = ConstraintLayout.LayoutParams.MATCH_PARENT;
         int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true; // flag for taps outside the popup also dismiss it
+        boolean focusable = true;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
         View dimBackground = activity.findViewById(R.id.dim_background);
         dimBackground.setVisibility(View.VISIBLE);
@@ -46,7 +46,6 @@ public class Edit {
         saveasstringbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 TextInputEditText saveAsStringText = popupView.findViewById(R.id.saveasstring);
                 System.out.println("savvvvvvvvvvvvvvvvvvv"+saveAsStringText);
@@ -79,7 +78,6 @@ public class Edit {
 
             }
         });
-        // Dismiss the dim background when the popup is dismissed
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {

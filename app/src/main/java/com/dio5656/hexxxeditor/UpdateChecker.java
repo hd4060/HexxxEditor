@@ -32,17 +32,14 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... voids) {
 
         try {
-            // Connect to the website and get the HTML document
-            Document document = Jsoup.connect("https://github.com/dio5656/HexxxEditor/blob/main/README.md").get();
-
-            // Use CSS selector to get the specific element you want
-            // For example, to get the text inside an element with the id "specificText"
+            //get the HTML document
+            Document document = Jsoup.connect("https://github.com/dio5656/HexxxEditor/blob/master/README.md").get();
             Element element = document.select("#user-content-version").first();
             System.out.println("element"+element);
             if (element != null) {
                 latestversion = element.text();
             }
-          //  System.out.println("text"+text);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +54,6 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
      }
 
      protected void onPostExecute(String result) {
-         // Update the TextView with the fetched text
        //  System.out.println("result="+result);
          if (!result.isEmpty()) {
             latestversion =result;
@@ -70,7 +66,6 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
              String packageName = activity.getPackageName();
 
              try{
-
                  PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
                  installedversion = packageInfo.versionName;
                  System.out.println("iiiiiiiiiii="+installedversion);

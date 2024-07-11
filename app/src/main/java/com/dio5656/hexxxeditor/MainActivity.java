@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE = 1;
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-  static   Uri myUri = null;
-   static TableLayout.LayoutParams params = new TableLayout.LayoutParams(android.widget.TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-
-   static int column_size =5;
+    static   Uri myUri = null;
+    static TableLayout.LayoutParams params = new TableLayout.LayoutParams(android.widget.TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+    static int column_size =5;
     static int columnSetCount=0;
-   static long edittextcount;
- static    long textviewcount;
-   static HashMap<String, String> savehashMap = new HashMap<>();
+    static long edittextcount;
+    static    long textviewcount;
+    static HashMap<String, String> savehashMap = new HashMap<>();
     ReadFromFile readFromFile;
     static int skip=0; //total file read
     static   int count=0; // read
@@ -73,23 +72,21 @@ public class MainActivity extends AppCompatActivity {
     static String texttofind ="";
     static boolean customColumns=false;
     int customColumnSize;
-     TableLayout tableLayout;
+    TableLayout tableLayout;
     int screenRatio;
-  static   boolean firsttime = true;
-
-static  String Encoding ="Utf8";
+    static boolean firsttime = true;
+    static  String Encoding ="Ansi";
     private NavController navController;
    static FragmentManager fragmentManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Encoding =getFromSharedPreferences("Encoding","Utf8");
+        Encoding =getFromSharedPreferences("Encoding","Ansi");
         System.out.println("Encoding="+ Encoding);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         // Get screen dimensions and density
-
         int density = (int) displayMetrics.density;
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
@@ -99,10 +96,10 @@ static  String Encoding ="Utf8";
         System.out.println("scaledDensity="+scaledDensity);
         System.out.println("Screen ratio="+screenRatio);
         //column_size = scaledFontSize/60/22*5/11*3+1;
+        // column size depends on screen ratio
         column_size = screenRatio ;
-// column size depends on screen width and density
-        // column_size = scaledFontSize/60/22*5/11*3+2;
         System.out.println("column_size="+column_size);
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -110,11 +107,10 @@ static  String Encoding ="Utf8";
        if (!checkPermissions()) {
             requestPermissions();
         }
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main3);
-         navController = navHostFragment.getNavController();
-        NavigationUI.setupActionBarWithNavController(this, navController);
-       // NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+       NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main3);
+       navController = navHostFragment.getNavController();
+       NavigationUI.setupActionBarWithNavController(this, navController);
+       appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         //open file button
@@ -196,20 +192,10 @@ static  String Encoding ="Utf8";
         });
 
 
-        /// check update
+        /// check update and show popup if any
          fragmentManager = getSupportFragmentManager();
         UpdateChecker updateChecker=new UpdateChecker(this,MainActivity.this);
         updateChecker.execute();
-        /*try {
-
-       //  long versionCode = packageInfo.getLongVersionCode();
-
-       //     String versionInfo = "Version Name: " + versionName + "\nVersion Code: " + versionCode;
-          //  System.out.println("vvvvvv"+versionName);
-
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }*/
 
     }
     public boolean checkPermissions() {
@@ -222,7 +208,7 @@ static  String Encoding ="Utf8";
     }
 
     Cursor c;
-    /// get filename method
+    /// get filename
     @SuppressLint("Range")
     private String getFileName(Uri uri) {
          c = getContentResolver().query(uri, null, null, null, null);
@@ -255,12 +241,11 @@ static  String Encoding ="Utf8";
                textviewcount=0;
                 column_size=screenRatio;
                  firsttime = true;
-               ///hide or set visible the buttons
+               ///change button visibilities
                 Button openFileButton = findViewById(R.id.openfilebutton2);
                 openFileButton.setVisibility(View.INVISIBLE);
                 Button findButton = findViewById(R.id.findbutton);
                 findButton.setVisibility(View.VISIBLE);
-              //  Button findnext = findViewById(R.id.findnextbutton);
                 findnextbutton.setVisibility(View.VISIBLE);
                // Button readmbutton = findViewById(R.id.readmbutton);
                 /* readmbutton.setVisibility(View.VISIBLE);*/
@@ -292,14 +277,9 @@ static  String Encoding ="Utf8";
                         int screenWidth = displayMetrics.widthPixels;
                         int scaledDensity = (int)displayMetrics.scaledDensity;
                         int scaledFontSize = 16*(screenWidth/ scaledDensity );
-                        //column_size = scaledFontSize/60/22*5/11*3+2;
                         tableLayout.addView(header_row, params);
                         tableLayout.setScrollContainer(true);
                         tableLayout.setVerticalScrollBarEnabled(true);
-
-                       // ScrollView scrollview = findViewById(R.id.scrollviewfortable);
-
-
 
                         //create header
                   /* for (int i = 1; i <= column_size; i++) {
@@ -310,8 +290,6 @@ static  String Encoding ="Utf8";
                        header_row.addView(textView_header1);
                    }*/
 
-
-
                         ///read hex and string values
                         readFromFile.start();
 
@@ -319,9 +297,7 @@ static  String Encoding ="Utf8";
                         //read more from file when  bottom of scroll view is reached
                         scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
                             if (!scrollView.canScrollVertically(1)) {
-
                                 readFromFile.start();
-
                             }
                         });
 
@@ -330,12 +306,7 @@ static  String Encoding ="Utf8";
                 });
                 executorService.shutdown();
             }
-
         }
-
-
-
-
     }
 
 
@@ -345,15 +316,16 @@ static  String Encoding ="Utf8";
         System.out.println("output="+output );
         return output.toString();
     }
+
     public static String stringToHex(String input) {
         StringBuilder hexString = new StringBuilder();
         for (char ch : input.toCharArray()) {
             String hex = Integer.toHexString(ch);
             hexString.append(hex);
         }
-
         return hexString.toString();
     }
+
     public static byte[] hexStringToByteArray(String hexString) throws IllegalArgumentException {
         if (hexString.length() % 2 != 0) {
             throw new IllegalArgumentException("Hex string must have an even length");
@@ -366,7 +338,6 @@ static  String Encoding ="Utf8";
             data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4)
                     + Character.digit(hexString.charAt(i+1), 16));
         }
-
         return data;
     }
 
@@ -378,24 +349,6 @@ static  String Encoding ="Utf8";
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuInflater inflater = getMenuInflater();
-      //  inflater.inflate(R.menu.main_menu, menu);
-
-        // Find the Spinner
-        MenuItem item = menu.findItem(R.id.showcolumnpopup);
-        Spinner spinner = (Spinner) item.getActionView();
-
-      /*  // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Columns, android.R.layout.simple_spinner_dropdown_item);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);*/
-//if( getCurrentFocus() == findViewById(R.id.mainmenu))
-
-
         return true;
     }
 
@@ -411,17 +364,10 @@ static  String Encoding ="Utf8";
             intent.addCategory(Intent.CATEGORY_OPENABLE);
                   intent.setType("*/*");
            readdone=false;
-            //column_size = scaledFontSize/60/22*5/11*3+2;
             startActivityForResult(intent,2);
             return true;
         }
         if (id == R.id.settings) {
-            //
-       //     NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main2);
-      // NavController navController = navHostFragment.getNavController();
-          //  Intent intent = new Intent(MainActivity.this, );
-         //   startActivity(intent);
-             // navController.navigate(R.id.secondFragment);
             setContentView(R.layout.fragment_second);
             Spinner spinner =findViewById(R.id.spinner);
             if (Encoding.equals("Ansi"))
@@ -435,10 +381,8 @@ static  String Encoding ="Utf8";
                     Encoding =getFromSharedPreferences("Encoding","Utf8");
                     System.out.println("hh"+spinner.getSelectedItem().toString());
                     }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
 
@@ -446,12 +390,8 @@ static  String Encoding ="Utf8";
 
         }
         if (id == R.id.showcolumnpopup)
-        {        //  View view = MainActivity.this.findViewById(id);
-           // view.setVisibility(View.INVISIBLE);
-
-
+        {
         showSpinnerPopup(findViewById(R.id.findbutton));
-           // return  true;
         }
 
 return super.onOptionsItemSelected(item);
@@ -475,36 +415,19 @@ return super.onOptionsItemSelected(item);
 
     @Override
    public void onBackPressed() {
-/*
-//        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main2);
-//        NavController navController = navHostFragment.getNavController();
-      if (navController.getCurrentDestination().getId() == R.id.secondFragment) {
-            System.out.println("ssssssdddddssssssssssss");
-           // setContentView(R.layout.activity_main);
-       //     navController.navigate(R.id.action_secondFragment_to_firstFragment);
-        } else {
-            super.onBackPressed();
-        }*/
-  //  if (this.getconte)
 
         View rootView = findViewById(android.R.id.content);
         if (rootView.findViewById(R.id.findbutton)==null)
         setContentView(binding.getRoot());
-    //    setSupportActionBar(binding.toolbar);
-       else
-       {
-             super.onBackPressed();
-        }
-      //  NavigationUI.setupActionBarWithNavController(this, navController);
-       // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-       // setContentView(R.layout.activity_main);
+        else
+            super.onBackPressed();
     }
 
     private void saveToSharedPreferences(String key, String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
-        editor.apply(); // or editor.commit() to save immediately
+        editor.apply();
     }
     private String getFromSharedPreferences(String key, String defaultValue) {
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
@@ -512,51 +435,36 @@ return super.onOptionsItemSelected(item);
     }
     private void showSpinnerPopup(View anchor) {
          PopupWindow popupWindow;
-        // Inflate the spinner layout
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.column_spinner_popup, findViewById(R.id.nav_host_fragment_content_main3),false);
-
-        // Create the popup window
         popupWindow = new PopupWindow(popupView,
                 ConstraintLayout.LayoutParams.MATCH_PARENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 true);
         View dimBackground = findViewById(R.id.dim_background);
         dimBackground.setVisibility(View.VISIBLE);
-
-        // Initialize the spinner
         Spinner spinner = popupView.findViewById(R.id.column_spinner);
         spinner.setSelection(column_size-3);
-      /*  ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Columns, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource*/
 
-        // Set the listener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               // String selectedItem = parent.getItemAtPosition(position).toString();
-                String selectedItem =  spinner.getSelectedItem().toString();
-          //      Toast.makeText(MainActivity.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
-
-           customColumnSize= Integer.parseInt(selectedItem);
-           if (column_size != customColumnSize)
-           {
+            String selectedItem =  spinner.getSelectedItem().toString();
+            customColumnSize= Integer.parseInt(selectedItem);
+            if (column_size != customColumnSize) {
                customColumns=true;
                column_size = Integer.parseInt(selectedItem);
                resetValuesAndReadFromStart();
-           }
+            }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Handle the case where no item is selected
-            }
+              }
         });
         Button closebutton = popupView.findViewById(R.id.closebutton);
         closebutton.setOnClickListener(v -> {popupWindow.dismiss();});
 
-        // Show the popup window below the menu item
         popupWindow.showAsDropDown(anchor, 0, 0);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -579,9 +487,7 @@ return super.onOptionsItemSelected(item);
         customEditTextArrayList.clear();
         customTextViewArrayList.clear();
         // savehashMap.clear();
-        //TableLayout tableLayout=findViewById(R.id.mytable);
         tableLayout.removeAllViews();
-      //  ReadFromFile readFromFile1 = new ReadFromFile()
         readFromFile.start();
         int lastaddress=0;
         // get the last address that was modified
@@ -591,7 +497,7 @@ return super.onOptionsItemSelected(item);
              lastaddress= Integer.parseInt(address);
 
         }
-        // read the file till the last adress and update changes to the file
+        // read the file till the last address and update changes to the file
         while (customEditTextArrayList.size()<lastaddress)
             readFromFile.start();
         for (String address : savehashMap.keySet()) {

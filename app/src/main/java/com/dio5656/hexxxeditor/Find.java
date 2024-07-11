@@ -39,11 +39,11 @@ public class Find extends AppCompatActivity {
             // Create the PopupWindow
             int width = ConstraintLayout.LayoutParams.MATCH_PARENT;
             int height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-            boolean focusable = true; //flag for taps outside the popup dismiss it
+            boolean focusable = true;
             final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
             View dimBackground =activity.findViewById(R.id.dim_background);
             dimBackground.setVisibility(View.VISIBLE);
-            // Show the PopupWindow anchored to the button
+            // Show the PopupWindow
             popupWindow.showAsDropDown(view);
             Button findtextsave = popupView.findViewById(R.id.findtextsave);
             findtextsave.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +60,7 @@ public class Find extends AppCompatActivity {
                     int skipcharsread=0;
                     int firsttry=0;
                     System.out.println("readdone="+readdone);
-                    while (//readdone == false ||
-                            firsttry==0// || nextchar==1
-                                    || (nextchar!=-1 )
-                    ) {
+                    while (firsttry==0 || nextchar!=-1) {
                         if (found)
                             break;
                         firsttry++;
@@ -73,8 +70,7 @@ public class Find extends AppCompatActivity {
                         System.out.println("readdone="+readdone);
                         System.out.println("nextchar="+nextchar);
 
-                        //   readsize = 500;  //uncommmmmmmmmmmmmmmmmmmmm
-                      //
+                        //   readsize = 500; to read more
                         readFromFile.start();
                         System.out.println("File is read");
                         System.out.println("edittextcount="+edittextcount);
@@ -109,7 +105,7 @@ public class Find extends AppCompatActivity {
 
                         }
                     }
-                  //  readsize = 50;
+                  //  readsize = 50; change to default
                     View dimBackground = activity.findViewById(R.id.dim_background);
                     dimBackground.setVisibility(View.INVISIBLE);
                     popupWindow.dismiss();
@@ -118,7 +114,6 @@ public class Find extends AppCompatActivity {
                     }
                 }
             });
-            // Dismiss the dim background when the popup is dismissed
             popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {

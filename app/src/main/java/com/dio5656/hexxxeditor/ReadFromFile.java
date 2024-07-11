@@ -48,13 +48,10 @@ import static com.dio5656.hexxxeditor.MainActivity.firsttime;
 public class ReadFromFile extends AppCompatActivity {
     Context context;
     Activity activity;
-    float screenRatio;
-    //firsttime=true;
 
     public ReadFromFile(Context context, Activity activity){
         this.context=context;
         this.activity=activity;
-        //column_size-=1; // comment this
         firsttime=true;
 
     }
@@ -96,7 +93,6 @@ if (firsttime && Encoding.equals("Ansi")) {
                     String line = "";
                     String stringpattern = "[0-9a-f]?[0-9a-f]";
                     Pattern pattern = Pattern.compile(stringpattern, Pattern.CASE_INSENSITIVE);
-
                     System.out.println("skip=" + skip);
                     if (Encoding.equals("Ansi")) {
                         bufferedInputStreamForAnsi.skip(skip);
@@ -151,8 +147,7 @@ if (firsttime && Encoding.equals("Ansi")) {
                                 public void afterTextChanged(Editable s) {
 
                                     // put in hashmap on if its hex value
-                                    //Matcher matcher = pattern.matcher(s.toString());
-                                   // if (matcher.matches()) {
+
                                     if (Encoding.equals("Ansi")) {
                                         Matcher matcher = pattern.matcher(s.toString());
                                         if (matcher.matches()) {
@@ -172,10 +167,7 @@ if (firsttime && Encoding.equals("Ansi")) {
                                         //    Toast.makeText(MainActivity.this, "Edited value: " + edittext.getText(), Toast.LENGTH_SHORT).show();
                                         //    Toast.makeText(MainActivity.this, "Edited value adress: " + edittext.getAddress(), Toast.LENGTH_SHORT).show();
                                     }
-
-
                                 }
-
                             });
                             new_row.addView(edittext);
                             if (Encoding.equals("Ansi")) {
@@ -190,8 +182,6 @@ if (firsttime && Encoding.equals("Ansi")) {
                             count++;
 
                             //set column size for overflow
-
-                           // if ((i==4 || i==5) && !columnSet) {
                             if ((i>=3) && columnSetCount <10  &&!customColumns &&!Encoding.equals("Ansi")) {
                                 columnSetCount++;
                                 int hexlenght=0;
@@ -199,10 +189,7 @@ if (firsttime && Encoding.equals("Ansi")) {
                                 for (int co = 0;co<i+1;co++) {
                                     hexlenght+=  customEditTextArrayList.get((int) edittextcount-1-co).getText().toString().length();
                                     aa+=customEditTextArrayList.get((int) edittextcount-1-co).getText().toString();
-
-                                }// h20 -i5 c6
-                                //h12 -i5 col6
-
+                                }
                                 System.out.println("hhhhexlenght="+hexlenght);
                                 System.out.println("iiiii="+i);
                                 System.out.println("aa="+aa);
@@ -211,19 +198,9 @@ if (firsttime && Encoding.equals("Ansi")) {
                                     System.out.println("hexlenght="+hexlenght);
                                     System.out.println("i="+i);
                                     System.out.println("exeeeeeeeeeeeecccccccccccc");
-                                  //  new_row.removeAllViews();
-                                   //column_size=3;
                                     column_size -= 1;
-                               //     columnSet=true;
-                                  //  column_size = scaledFontSize/60/22*5/11*3+1;
                                     new_row.removeAllViews();
-                                //    TableLayout tableLayout = activity.findViewById(R.id.mytable);
-                                  //  tableLayout.removeAllViews();
-                                   // ReadFromFile rff = new ReadFromFile(context,activity);
                                     resetValuesAndReadFromStart();
-
-                                    //this.start();
-
                                     return;
                                  }
 
@@ -263,10 +240,6 @@ if (firsttime && Encoding.equals("Ansi")) {
                         readdone = false;
                     }
                     count = 0;
-                    //bufferedInputStreamForAnsi.close();
-                    //bufferedInputStreamForUtf8.close();
-                    //inputStream.close();
-
 
                 } catch (Exception e) {
                     System.out.println(e);
@@ -279,89 +252,16 @@ if (firsttime && Encoding.equals("Ansi")) {
            // readsize=100;
 
     }
-  /*  public static String hexToUtf8(String hex) {
-        if (hex == null || hex.length() % 2 != 0) {
-            //throw new IllegalArgumentException("Hex string has an invalid length");
-            return null;
-        }
 
-        byte[] bytes = new byte[hex.length() / 2];
-        for (int i = 0; i < hex.length(); i += 2) {
-            bytes[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
-                    + Character.digit(hex.charAt(i + 1), 16));
-        }
-
-        return new String(bytes, StandardCharsets.UTF_8);
-    }*/
-  public static String hexStringToUtf8(String hexString) throws IllegalArgumentException {
-      if (hexString.length() % 2 != 0) {
-        //  throw new IllegalArgumentException("Hex string must have an even length");
-          return "f";
-      }
-
-      int len = hexString.length();
-      byte[] data = new byte[len / 2];
-
-      for (int i = 0; i < len; i += 2) {
-          data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4)
-                  + Character.digit(hexString.charAt(i+1), 16));
-      }
-
-      return new String(data, StandardCharsets.UTF_8);
-  }
-    public static String intToUtf8(int number) {
-        if (number < 0 || number > 0x10FFFF) {
-            throw new IllegalArgumentException("Integer value out of Unicode range");
-        }
-
-        // Convert the integer to a hexadecimal string
-        String hex = Integer.toHexString(number);
-
-        // Ensure the hex string is valid UTF-8 bytes
-        // For single-byte UTF-8 characters, hex values are between 00 and 7F
-        // For two-byte UTF-8 characters, hex values are between C080 and DFBF
-        // For three-byte UTF-8 characters, hex values are between E08080 and EFBFBF
-        // For four-byte UTF-8 characters, hex values are between F0808080 and F48FBFBF
-        if (number <= 0x7F) {
-            hex = String.format("%02X", number);
-        } else if (number <= 0x7FF) {
-            hex = String.format("%04X", number);
-        } else if (number <= 0xFFFF) {
-            hex = String.format("%06X", number);
-        } else if (number <= 0x10FFFF) {
-            hex = String.format("%08X", number);
-        }
-
-        // Convert the hex string to a byte array
-        byte[] bytes = hexStringToByteArray(hex);
-
-        // Decode the byte array to a UTF-8 string
-        return new String(bytes, StandardCharsets.UTF_8);
-    }
-
-    private static byte[] hexStringToByteArray(String hex) {
-        int length = hex.length();
-        byte[] bytes = new byte[length / 2];
-        for (int i = 0; i < length; i += 2) {
-            bytes[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
-                    + Character.digit(hex.charAt(i + 1), 16));
-        }
-        return bytes;
-    }
     public static String utf8ToHex(String utf8String) {
         if (utf8String == null) {
             throw new IllegalArgumentException("Input string cannot be null");
         }
-
-        // Convert the UTF-8 string to a byte array
         byte[] bytes = utf8String.getBytes(StandardCharsets.UTF_8);
-
-        // Convert each byte to its hexadecimal representation
         StringBuilder hexStringBuilder = new StringBuilder();
         for (byte b : bytes) {
             hexStringBuilder.append(String.format("%02X", b));
         }
-
         return hexStringBuilder.toString();
     }
 
@@ -371,7 +271,6 @@ if (firsttime && Encoding.equals("Ansi")) {
         if (hex == null ||
                 hex.length() % 2 != 0) {
             return ' ';
-           // throw new IllegalArgumentException("Invalid hex string");
         }
 
         byte[] bytes = new byte[hex.length() / 2];
@@ -383,8 +282,7 @@ if (firsttime && Encoding.equals("Ansi")) {
         String decodedString = new String(bytes, StandardCharsets.UTF_8);
 
         if (decodedString.length() != 1) {
-          //  throw new IllegalArgumentException("Hex string does not represent a single character");
-       return ' ';
+            return ' ';
         }
 
         return decodedString.charAt(0);

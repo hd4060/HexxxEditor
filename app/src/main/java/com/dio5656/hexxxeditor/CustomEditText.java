@@ -20,34 +20,4 @@ public class CustomEditText  extends androidx.appcompat.widget.AppCompatEditText
         return address;
     }
 
-    private Paint paint;
-    public void init() {
-        paint = new Paint();
-        paint.setTextSize(getTextSize());
-
-        addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No action needed
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adjustWidth();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // No action needed
-            }
-        });
-
-        adjustWidth();
-    }
-
-    private void adjustWidth() {
-        String text = getText().toString();
-        float textWidth = paint.measureText(text) + getPaddingLeft() + getPaddingRight();
-        setWidth((int) textWidth);
-    }
 }
