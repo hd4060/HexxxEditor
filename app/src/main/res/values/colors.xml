@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bgColor">#323930</color>
+
+
+    <color name="colorPrimary">#373737</color> <!-- Replace with your new primary color -->
+    <color name="colorPrimaryVariant">#E64A19</color> <!-- Replace with your new primary variant color -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- Text color on primary color -->
+
+    <color name="colorSecondary">#03A9F4</color> <!-- Replace with your new secondary color -->
+    <color name="colorSecondaryVariant">#0288D1</color> <!-- Replace with your new secondary variant color -->
+    <color name="colorOnSecondary">#FFFFFF</color> <!-- Text color on secondary color -->
+
+</resources>

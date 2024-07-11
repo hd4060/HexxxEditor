@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <!-- Dim background view -->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_content_main3"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
+
+    <Button
+        android:id="@+id/openfilebutton2"
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:text="Open a File"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dim_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:background="@android:color/black"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/findbutton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:visibility="invisible"
+        app:icon="@android:drawable/ic_search_category_default"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollviewfortable"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/findnextbutton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/findnextbutton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:enabled="false"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:visibility="invisible"
+        app:icon="@android:drawable/ic_popup_sync"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/editbutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@id/findbutton"
+        app:layout_constraintRight_toLeftOf="@id/editbutton"
+        app:layout_constraintStart_toEndOf="@+id/findbutton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/editbutton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:visibility="invisible"
+        app:icon="@android:drawable/ic_menu_edit"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:layout_constraintLeft_toRightOf="@id/findnextbutton"
+        app:layout_constraintRight_toLeftOf="@id/savebutton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/savebutton"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="invisible"
+        app:icon="@android:drawable/ic_menu_save"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:layout_constraintLeft_toRightOf="@id/editbutton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollviewfortable"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        android:fadeScrollbars="false"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarFadeDuration="0"
+        android:scrollbars="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:id="@+id/mytable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:isScrollContainer="true"
+            android:measureWithLargestChild="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
+            android:verticalScrollbarPosition="right"
+            android:visibility="visible">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsum"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+
+            <!-- Add more TableRows for additional rows -->
+
+        </TableLayout>
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/readmbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="320dp"
+        android:paddingLeft="0dp"
+        android:text="read"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/savebutton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/themecontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/border"
+        android:backgroundTint="#4E4E4E"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/autotheme"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/round_blackandwhite"
+            app:srcCompat="@drawable/round_blackandwhite" />
+
+        <ImageButton
+            android:id="@+id/darktheme"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/autotheme"
+            android:background="@drawable/round_black"
+            app:srcCompat="@drawable/round_black" />
+
+        <ImageButton
+            android:id="@+id/whitetheme"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@+id/darktheme"
+            android:layout_toRightOf="@id/darktheme"
+            android:background="@drawable/round_white"
+            app:srcCompat="@drawable/round_white" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

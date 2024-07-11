@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dio5656.hexxxeditor.MainActivity"
+    android:id="@+id/mainmenu">
+    <item
+        android:id="@+id/openanewfile"
+        android:orderInCategory="0"
+        android:title="@string/openfile"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="3"
+        android:title="@string/action_settings" />
+    <item
+
+        android:id="@+id/showcolumnpopup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orderInCategory="2"
+        android:title="Layout Settings"
+        android:visible="false" />
+
+
+</menu>
