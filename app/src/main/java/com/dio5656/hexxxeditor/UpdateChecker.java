@@ -34,7 +34,9 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
         try {
             //get the HTML document
             Document document = Jsoup.connect("https://github.com/dio5656/HexxxEditor/blob/master/README.md").get();
-            Element element = document.select("#user-content-version").first();
+          //  System.out.println("doc"+document);
+          //  Element element = document.select("#user-content-version").first();
+            Element element = document.getElementById("user-content-version");
             System.out.println("element"+element);
             if (element != null) {
                 latestversion = element.text();
