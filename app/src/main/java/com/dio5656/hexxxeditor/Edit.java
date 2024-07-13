@@ -42,13 +42,13 @@ public class Edit {
         // Show the PopupWindow
         popupWindow.showAsDropDown(anchorView);
         Button saveasstringbutton = popupView.findViewById(R.id.saveasstringbutton);
-        System.out.println("saveasstringbutton="+saveasstringbutton);
+        // // System.out.println("saveasstringbutton="+saveasstringbutton);
         saveasstringbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 TextInputEditText saveAsStringText = popupView.findViewById(R.id.saveasstring);
-                System.out.println("savvvvvvvvvvvvvvvvvvv"+saveAsStringText);
+                // System.out.println("savvvvvvvvvvvvvvvvvvv"+saveAsStringText);
                 //get focused edittext
                 View focusedView = activity.getCurrentFocus();
                 if (focusedView instanceof CustomEditText) {
@@ -60,7 +60,7 @@ public class Edit {
                         if (custom.getAddress()+i>customEditTextArrayList.size()-1)
                             break;
                         CustomEditText customEditText = customEditTextArrayList.get((int)custom.getAddress()+i);
-                        System.out.println("customEditText="+customEditText);
+                        // System.out.println("customEditText="+customEditText);
                         if (customEditText!=null) {
                             if (Encoding.equals("ansi")) {
                                 customEditText.setText(stringToHex(String.valueOf(texttosave.charAt(i))));

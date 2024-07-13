@@ -66,11 +66,11 @@ if (firsttime && Encoding.equals("Ansi")) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        System.out.println("column_size based on screen ratio="+column_size);
-            System.out.println("reeeeead first line");
+        // System.out.println("column_size based on screen ratio="+column_size);
+            // System.out.println("reeeeead first line");
           //  ExecutorService executorService = Executors.newSingleThreadExecutor();
             //  executorService.execute(() -> {
-          //  System.out.println("inside executeeeeeeeee");
+          //  // System.out.println("inside executeeeeeeeee");
             activity.runOnUiThread(() -> {
                    /* new Thread(new Runnable() {
                         @Override
@@ -80,8 +80,8 @@ if (firsttime && Encoding.equals("Ansi")) {
                           /*  runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {*/
-                Log.d("Main Activity", "reeeeead start on ui thread");
-                System.out.println("reeeeead start on ui thread");
+               // Log.d("Main Activity", "reeeeead start on ui thread");
+                // System.out.println("reeeeead start on ui thread");
                 TableRow new_row;
                 ContentResolver contentResolver = context.getContentResolver();
                 try (InputStream inputStream = contentResolver.openInputStream(myUri);
@@ -96,7 +96,7 @@ if (firsttime && Encoding.equals("Ansi")) {
                     String line = "";
                     String stringpattern = "[0-9a-f]?[0-9a-f]";
                     Pattern pattern = Pattern.compile(stringpattern, Pattern.CASE_INSENSITIVE);
-                    System.out.println("skip=" + skip);
+                    // System.out.println("skip=" + skip);
                     if (Encoding.equals("Ansi")) {
                         bufferedInputStreamForAnsi.skip(skip);
                         nextchar = bufferedInputStreamForAnsi.read();
@@ -104,7 +104,7 @@ if (firsttime && Encoding.equals("Ansi")) {
                         bufferedInputStreamForUtf8.skip(skip);
                         nextchar = bufferedInputStreamForUtf8.read();
                     }
-                    System.out.println("nextchar in read method=" + nextchar);
+                    // System.out.println("nextchar in read method=" + nextchar);
                     if (nextchar == -1) {
                         readdone = true;
                     } else {
@@ -113,10 +113,10 @@ if (firsttime && Encoding.equals("Ansi")) {
 
                     //create rows
                     while (nextchar != -1 && count < readsize) {
-                        System.out.println("column_size="+column_size);
+                        // System.out.println("column_size="+column_size);
 
                         new_row = new TableRow(context);
-                        System.out.println("aaaaaaaaaaaaaaaaaa");
+                        // System.out.println("aaaaaaaaaaaaaaaaaa");
                         new_row.setLayoutParams(params);
                         new_row.setGravity(Gravity.CENTER);
                         //create columns of column_size
@@ -204,14 +204,14 @@ if (firsttime && Encoding.equals("Ansi")) {
                                     hexlenght+=  customEditTextArrayList.get((int) edittextcount-1-co).getText().toString().length();
                                     aa+=customEditTextArrayList.get((int) edittextcount-1-co).getText().toString();
                                 }
-                                System.out.println("hhhhexlenght="+hexlenght);
-                                System.out.println("iiiii="+i);
-                                System.out.println("aa="+aa);
+                                // System.out.println("hhhhexlenght="+hexlenght);
+                                // System.out.println("iiiii="+i);
+                                // System.out.println("aa="+aa);
                                 if (hexlenght>=column_size*3){
 
-                                    System.out.println("hexlenght="+hexlenght);
-                                    System.out.println("i="+i);
-                                    System.out.println("exeeeeeeeeeeeecccccccccccc");
+                                    // System.out.println("hexlenght="+hexlenght);
+                                    // System.out.println("i="+i);
+                                    // System.out.println("exeeeeeeeeeeeecccccccccccc");
                                     column_size -= 1;
                                     new_row.removeAllViews();
                                     resetValuesAndReadFromStart();
@@ -220,29 +220,29 @@ if (firsttime && Encoding.equals("Ansi")) {
 
                             }
                         }
-                        System.out.println("line.length()=" + line.length());
+                        // System.out.println("line.length()=" + line.length());
 
                         //add textview to rows
                         for (int i = 0; i < line.length(); i++) {
-                            System.out.println("sssssssssss");
+                            // System.out.println("sssssssssss");
                             CustomTextView textView = new CustomTextView(context);
-                            System.out.println("asdddddddddddd");
+                            // System.out.println("asdddddddddddd");
                             textView.setTextSize(17f);
                             textView.setTypeface(Typeface.DEFAULT_BOLD);
                             textView.setPadding(2, 0, 3, 0);
                             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                             textView.setBackground(AppCompatResources.getDrawable(context,R.drawable.twostrokes));
-                            System.out.println("1111aaaaaaaaaaa");
+                            // System.out.println("1111aaaaaaaaaaa");
                             textView.setText(line.substring(i, i + 1));
                             textView.setAddress(textviewcount);
                             customTextViewArrayList.add(textView);
                             textviewcount++;
 
-                            System.out.println("bbbbbbb");
+                            // System.out.println("bbbbbbb");
 
                             new_row.addView(textView);
                         }
-                        System.out.println("ccccccccccc");
+                        // System.out.println("ccccccccccc");
                         TableLayout tableLayout = activity.findViewById(R.id.mytable);
                         tableLayout.addView(new_row, params);
                         line = "";
@@ -255,7 +255,7 @@ if (firsttime && Encoding.equals("Ansi")) {
                     count = 0;
 
                 } catch (Exception e) {
-                    System.out.println(e);
+                    // System.out.println(e);
                 }
 
             });
@@ -310,13 +310,13 @@ if (firsttime && Encoding.equals("Ansi")) {
         customEditTextArrayList.clear();
         customTextViewArrayList.clear();
         // savehashMap.clear();
-        System.out.println("abc");
+        // System.out.println("abc");
         TableLayout tableLayout=activity.findViewById(R.id.mytable);
-        System.out.println("ddd");
+        // System.out.println("ddd");
         tableLayout.removeAllViews();
           ReadFromFile readFromFile1 = new ReadFromFile(context,activity);
-        System.out.println("ee");
+        // System.out.println("ee");
         readFromFile1.start();
-        System.out.println("def");
+        // System.out.println("def");
     }
 }

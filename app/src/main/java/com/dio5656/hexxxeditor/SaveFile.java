@@ -44,8 +44,8 @@ public class SaveFile {
                 return intKey1.compareTo(intKey2);
             });
             sortedMap.putAll(savehashMap);
-            System.out.println("savehashmap"+savehashMap);
-            System.out.println("sortedmap"+sortedMap);
+            // System.out.println("savehashmap"+savehashMap);
+            // System.out.println("sortedmap"+sortedMap);
             ContentResolver contentResolver = context.getContentResolver();
             InputStream inputStreamForAnsi = contentResolver.openInputStream(myUri);
             InputStreamReader inputStreamReader = new InputStreamReader(inputStreamForAnsi);
@@ -66,7 +66,7 @@ public class SaveFile {
             int i =0;
             for (String address : sortedMap.keySet()) {
 
-                System.out.println("adress+"+i+"= "+address);
+                // System.out.println("adress+"+i+"= "+address);
             }
             //get the modified values
             for (String address : sortedMap.keySet()) {
@@ -77,14 +77,14 @@ public class SaveFile {
                 } else {
                      byteArray = utf8HexStringToByteArray(valuechanged);
                 }
-                System.out.println("bytearray in char"+ new String(byteArray, StandardCharsets.UTF_8));
+                // System.out.println("bytearray in char"+ new String(byteArray, StandardCharsets.UTF_8));
 
                 //this works when multiple chars are edited
                 if (!oldaddress.equals("-5"))
                 {
-                    System.out.println("22222222222");
-                    System.out.println("address="+address);
-                    System.out.println("oldaddress="+oldaddress);
+                    // System.out.println("22222222222");
+                    // System.out.println("address="+address);
+                    // System.out.println("oldaddress="+oldaddress);
                     offset= Integer.valueOf(address) - Integer.valueOf(oldaddress)-1;
                     if (Encoding.equals("Ansi"))
                         inputStreamForAnsi.skip(1);
@@ -95,15 +95,15 @@ public class SaveFile {
                     }
 
                     //inputStream.skip(1);
-                    System.out.println("offset="+offset);
-                    System.out.println("realoffset="+realoffset);
+                    // System.out.println("offset="+offset);
+                    // System.out.println("realoffset="+realoffset);
                     if (Encoding.equals("Ansi")) {
                         bytesRead = inputStreamForAnsi.read(byteBufferForAnsi,0, offset);
                     } else {
                         bytesRead = inputStreamForUtf8.read(charBufferForUtf8, 0, offset);
                     }
-                    System.out.println("buffer="+charBufferForUtf8);
-                    System.out.println("bytesRead="+bytesRead);
+                    // System.out.println("buffer="+charBufferForUtf8);
+                    // System.out.println("bytesRead="+bytesRead);
                     if ( bytesRead !=-1) {
                         if (Encoding.equals("Ansi")) {
                             outputStreamForAnsi.write(byteBufferForAnsi, 0,offset);
@@ -113,9 +113,9 @@ public class SaveFile {
                         outputStreamForUtf8.write(new String(byteArray, StandardCharsets.UTF_8));
                         bytesRead = inputStreamForUtf8.read();
                         String charRead = String.valueOf((char) bytesRead);
-                        System.out.println("charRead2222="+charRead);
-                        System.out.println("charRead.getBytes().length"+charRead.getBytes().length);
-                        System.out.println("valuechanged.length()/2="+valuechanged.length()/2);
+                        // System.out.println("charRead2222="+charRead);
+                        // System.out.println("charRead.getBytes().length"+charRead.getBytes().length);
+                        // System.out.println("valuechanged.length()/2="+valuechanged.length()/2);
                         if (charRead.getBytes().length >1 &&valuechanged.length()/2==1 ) {
                             outputStreamForUtf8.write(0);
                         }
@@ -125,7 +125,7 @@ public class SaveFile {
                     }
                 }
                 //this works the first time edit is made
-                System.out.println("11111111111");
+                // System.out.println("11111111111");
                 //calc amount of bytes edittext in offset
                 int realadress=0;
                 for (int b=0;b<Integer.valueOf(address);b++) {
@@ -136,27 +136,27 @@ public class SaveFile {
                 } else {
                     bytesRead = inputStreamForUtf8.read(charBufferForUtf8, 0, Integer.parseInt(address));
                 }
-                System.out.println("adress="+address);
-                System.out.println("realadress="+realadress);
+                // System.out.println("adress="+address);
+                // System.out.println("realadress="+realadress);
                 if( bytesRead!=-1) {
 
-                    System.out.println("bytesRead="+bytesRead);
-                    System.out.println("buffer="+ Arrays.toString(charBufferForUtf8));
-                    System.out.println("buffertostring"+charBufferForUtf8.toString());
-                    System.out.println("String.valueOf(buffer)"+String.valueOf(charBufferForUtf8));
+                    // System.out.println("bytesRead="+bytesRead);
+                    // System.out.println("buffer="+ Arrays.toString(charBufferForUtf8));
+                    // System.out.println("buffertostring"+charBufferForUtf8.toString());
+                    // System.out.println("String.valueOf(buffer)"+String.valueOf(charBufferForUtf8));
                     if (Encoding.equals("Ansi")) {
                         outputStreamForAnsi.write(byteBufferForAnsi, 0, bytesRead);
                         outputStreamForAnsi.write(byteArray);
                     } else {
 
                         outputStreamForUtf8.write(charBufferForUtf8, 0, Integer.parseInt(address));
-                        System.out.println("byyyyte=" + new String(byteArray, StandardCharsets.UTF_8));
+                        // System.out.println("byyyyte=" + new String(byteArray, StandardCharsets.UTF_8));
                         outputStreamForUtf8.write(new String(byteArray, StandardCharsets.UTF_8), 0, new String(byteArray, StandardCharsets.UTF_8).length());
                         bytesRead = inputStreamForUtf8.read();
                         String charRead = String.valueOf((char) bytesRead);
-                        System.out.println("charRead" + charRead);
+                        // System.out.println("charRead" + charRead);
                         if (charRead.getBytes().length > 1 && valuechanged.length() / 2 == 1) {
-                            System.out.println("charRead.getBytes().length" + charRead.getBytes().length);
+                            // System.out.println("charRead.getBytes().length" + charRead.getBytes().length);
                             outputStreamForUtf8.write(0);
                         }
                     }

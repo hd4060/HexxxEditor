@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Encoding =getFromSharedPreferences("Encoding","Ansi");
-        System.out.println("Encoding="+ Encoding);
+        // System.out.println("Encoding="+ Encoding);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         // Get screen dimensions and density
@@ -92,12 +92,12 @@ public class MainActivity extends AppCompatActivity {
         int scaledDensity = (int)displayMetrics.scaledDensity;
         int scaledFontSize = 16*(screenWidth/ scaledDensity );
          screenRatio =  screenWidth*10/screenHeight;
-        System.out.println("scaledDensity="+scaledDensity);
-        System.out.println("Screen ratio="+screenRatio);
+        // System.out.println("scaledDensity="+scaledDensity);
+        // System.out.println("Screen ratio="+screenRatio);
         //column_size = scaledFontSize/60/22*5/11*3+1;
         // column size depends on screen ratio
         column_size = screenRatio ;
-        System.out.println("column_size="+column_size);
+        // System.out.println("column_size="+column_size);
 
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         //Save theme option
         SharedPreferences prefs = getSharedPreferences("theme", MODE_PRIVATE);
         String theme= prefs.getString("theme","auto");
-        System.out.println("theme="+theme);
+        // System.out.println("theme="+theme);
         if (theme.equals("white"))
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         else if (theme.equals("dark"))
@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
     public static String hexToString(String hex) {
         StringBuilder output = new StringBuilder();
         output.append((char) Integer.parseInt(hex, 16));
-        System.out.println("output="+output );
+        // System.out.println("output="+output );
         return output.toString();
     }
 
@@ -387,14 +387,14 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                    saveToSharedPreferences("Encoding",spinner.getSelectedItem().toString());
                     Encoding =getFromSharedPreferences("Encoding","Utf8");
-                    System.out.println("hh"+spinner.getSelectedItem().toString());
+                    // System.out.println("hh"+spinner.getSelectedItem().toString());
                     }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
 
-            System.out.println("spinner="+spinner);
+            // System.out.println("spinner="+spinner);
 
         }
         if (id == R.id.showcolumnpopup)

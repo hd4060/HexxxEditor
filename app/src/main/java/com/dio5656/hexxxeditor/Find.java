@@ -55,39 +55,39 @@ public class Find extends AppCompatActivity {
 
                     if(texttofind.isEmpty())
                         return;
-                    System.out.println("texttofind=" + texttofind);
+                    // System.out.println("texttofind=" + texttofind);
                     // loop to find
                     int skipcharsread=0;
                     int firsttry=0;
-                    System.out.println("readdone="+readdone);
+                    // System.out.println("readdone="+readdone);
                     while (firsttry==0 || nextchar!=-1) {
                         if (found)
                             break;
                         firsttry++;
-                        System.out.println("read file while looooooooop starts");
-                        System.out.println("edittextcount="+edittextcount);
-                        System.out.println("textviewcount="+textviewcount);
-                        System.out.println("readdone="+readdone);
-                        System.out.println("nextchar="+nextchar);
+                        // System.out.println("read file while looooooooop starts");
+                        // System.out.println("edittextcount="+edittextcount);
+                        // System.out.println("textviewcount="+textviewcount);
+                        // System.out.println("readdone="+readdone);
+                        // System.out.println("nextchar="+nextchar);
 
                         //   readsize = 500; to read more
                         readFromFile.start();
-                        System.out.println("File is read");
-                        System.out.println("edittextcount="+edittextcount);
-                        System.out.println("textviewcount="+textviewcount);
+                        // System.out.println("File is read");
+                        // System.out.println("edittextcount="+edittextcount);
+                        // System.out.println("textviewcount="+textviewcount);
                         result="";
-                        System.out.println("customTextViewArrayList.size()="+customTextViewArrayList.size());
-                        System.out.println("skipcharsread="+skipcharsread);
+                        // System.out.println("customTextViewArrayList.size()="+customTextViewArrayList.size());
+                        // System.out.println("skipcharsread="+skipcharsread);
                         while (skipcharsread < customTextViewArrayList.size()) {
-                            System.out.println("looooooooop");
+                            // System.out.println("looooooooop");
                             result+=customTextViewArrayList.get(skipcharsread).getText().toString();
                             skipcharsread++;
                             if (result.contains(texttofind)){
                                 found=true;
-                                System.out.println("fooooooooooound");
-                                System.out.println("result.lenght="+result.length());
-                                System.out.println("texttofind.lenght="+texttofind.length());
-                                System.out.println("customTextViewArrayList.size()="+customTextViewArrayList.size());
+                                // System.out.println("fooooooooooound");
+                                // System.out.println("result.lenght="+result.length());
+                                // System.out.println("texttofind.lenght="+texttofind.length());
+                                // System.out.println("customTextViewArrayList.size()="+customTextViewArrayList.size());
                                 CustomEditText customEditText =customEditTextArrayList.get(skipcharsread-texttofind.length());
                                 customEditText.requestFocus();
                                 customEditText.setSelection(0,customEditText.getText().toString().length());
@@ -99,7 +99,7 @@ public class Find extends AppCompatActivity {
                             }
 
 
-                            System.out.println("resultttttt="+result);
+                            // System.out.println("resultttttt="+result);
 
 
 

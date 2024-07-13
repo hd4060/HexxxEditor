@@ -34,10 +34,10 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
         try {
             //get the HTML document
             Document document = Jsoup.connect("https://github.com/dio5656/HexxxEditor/blob/master/README.md").get();
-          //  System.out.println("doc"+document);
+          //  // System.out.println("doc"+document);
           //  Element element = document.select("#user-content-version").first();
             Element element = document.getElementById("user-content-version");
-            System.out.println("element"+element);
+            // System.out.println("element"+element);
             if (element != null) {
                 latestversion = element.text();
             }
@@ -56,10 +56,10 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
      }
 
      protected void onPostExecute(String result) {
-       //  System.out.println("result="+result);
+       //  // System.out.println("result="+result);
          if (!result.isEmpty()) {
             latestversion =result;
-             System.out.println("Version="+ latestversion.split(": v")[1]);
+             // System.out.println("Version="+ latestversion.split(": v")[1]);
              //get latest version
              latestversion = latestversion.split(": v")[1];
              //get installed version
@@ -70,7 +70,7 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
              try{
                  PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
                  installedversion = packageInfo.versionName;
-                 System.out.println("iiiiiiiiiii="+installedversion);
+                 // System.out.println("iiiiiiiiiii="+installedversion);
              } catch (PackageManager.NameNotFoundException e) {
                  e.printStackTrace();
              }
@@ -84,11 +84,11 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
      }
      public boolean isNewVersion (String installed, String latest) {
          String  [] installedParts = installed.split("\\.");
-         System.out.println("installedParts"+installedParts.length);
+         // System.out.println("installedParts"+installedParts.length);
          String  [] latestParts = latest.split("\\.");
-         System.out.println("latestParts"+latestParts.length);
+         // System.out.println("latestParts"+latestParts.length);
          int versionlenght = Math.min(installedParts.length,latestParts.length);
-         System.out.println("versionlenght="+versionlenght);
+         // System.out.println("versionlenght="+versionlenght);
          for (int i=0;i<versionlenght;i++) {
              if (Integer.valueOf(latestParts[i])> Integer.valueOf(installedParts[i]))
                  return true;

@@ -30,34 +30,34 @@ public class FindNext {
 
             int addresstoskip = (int) customEditTexthighlighted.getAddress();
             skipcharsread+=addresstoskip+1;
-            System.out.println("highliiight"+customEditTexthighlighted.getAddress());
+            // System.out.println("highliiight"+customEditTexthighlighted.getAddress());
             int firsttry=0;
             boolean found =false;
-            System.out.println("readdone="+readdone);
+            // System.out.println("readdone="+readdone);
             while (!readdone || firsttry==0) {
                 if (found) break;
                 firsttry++;
-                System.out.println("loooooooooooooo");
-                System.out.println("readdone="+readdone);
-                System.out.println("firsttry="+firsttry);
+                // System.out.println("loooooooooooooo");
+                // System.out.println("readdone="+readdone);
+                // System.out.println("firsttry="+firsttry);
                 result="";
                 // readsize = 500;
                 readFromFile.start();
-                System.out.println("file is read");
+                // System.out.println("file is read");
 
                 while (skipcharsread < customTextViewArrayList.size()) {
-                    System.out.println("looooooooop");
+                    // System.out.println("looooooooop");
                     result += customTextViewArrayList.get(skipcharsread).getText().toString();
 
                     if (result.contains(texttofind)
                     ) {
                         found=true;
-                        System.out.println("yeeeeeeeeeeeeees");
-                        System.out.println("result.lenght="+result.length());
-                        System.out.println("texttofind.lenght="+texttofind.length());
-                        System.out.println("customTextViewArrayList.size()="+customTextViewArrayList.size());
-                        System.out.println("skipcharsread="+skipcharsread);
-                        System.out.println("foooooooooooooound=" + result);
+                        // System.out.println("yeeeeeeeeeeeeees");
+                        // System.out.println("result.lenght="+result.length());
+                        // System.out.println("texttofind.lenght="+texttofind.length());
+                        // System.out.println("customTextViewArrayList.size()="+customTextViewArrayList.size());
+                        // System.out.println("skipcharsread="+skipcharsread);
+                        // System.out.println("foooooooooooooound=" + result);
                         result = "";
                         CustomEditText customEditText = customEditTextArrayList.get(skipcharsread-texttofind.length()+1);
                         customEditText.requestFocus();
@@ -65,7 +65,7 @@ public class FindNext {
                         Snackbar.make(view, "Found", Snackbar.LENGTH_SHORT).show();
                         break;
                     }
-                    System.out.println("result=" + result);
+                    // System.out.println("result=" + result);
                     skipcharsread++;
 
                 }
