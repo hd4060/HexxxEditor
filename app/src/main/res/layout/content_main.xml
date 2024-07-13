@@ -120,6 +120,7 @@
         android:orientation="vertical"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarFadeDuration="0"
+        android:scrollbarStyle="insideOverlay"
         android:scrollbars="vertical"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

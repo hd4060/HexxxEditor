@@ -3,6 +3,7 @@ package com.dio5656.hexxxeditor;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -60,6 +61,8 @@ if (firsttime && Encoding.equals("Ansi")) {
         column_size= column_size*3/2;
         firsttime=false;
     }
+
+        if( column_size > 12) column_size=12;
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
@@ -169,6 +172,17 @@ if (firsttime && Encoding.equals("Ansi")) {
                                     }
                                 }
                             });
+                            edittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                                @Override
+                                public void onFocusChange(View v, boolean hasFocus) {
+                                    CustomTextView customTextView = customTextViewArrayList.get((int)edittext.getAddress());
+                                    if (hasFocus) {
+                                        customTextView.setBackgroundResource(R.drawable.twostrokes_highlighted);
+                                    } else {
+                                        customTextView.setBackgroundResource(R.drawable.twostrokes);
+                                    }
+                                }
+                            });
                             new_row.addView(edittext);
                             if (Encoding.equals("Ansi")) {
                                 nextchar = bufferedInputStreamForAnsi.read();
@@ -232,7 +246,6 @@ if (firsttime && Encoding.equals("Ansi")) {
                         TableLayout tableLayout = activity.findViewById(R.id.mytable);
                         tableLayout.addView(new_row, params);
                         line = "";
-
                     }
                     if (nextchar == -1) {
                         readdone = true;

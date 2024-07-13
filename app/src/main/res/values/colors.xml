@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bgColor">#323930</color>
-
+    <color name="texthighlightcolor">#33AAff</color>
 
     <color name="colorPrimary">#373737</color> <!-- Replace with your new primary color -->
     <color name="colorPrimaryVariant">#E64A19</color> <!-- Replace with your new primary variant color -->

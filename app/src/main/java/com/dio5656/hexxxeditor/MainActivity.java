@@ -8,8 +8,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     ReadFromFile readFromFile;
     static int skip=0; //total file read
     static   int count=0; // read
-    static int readsize=150; // to read part by part
+    static int readsize=200; // to read part by part
     static boolean readdone = false;
     static ArrayList<CustomTextView> customTextViewArrayList = new ArrayList<>();
     static ArrayList<CustomEditText> customEditTextArrayList = new ArrayList<>();
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     static  String Encoding ="Ansi";
     private NavController navController;
    static FragmentManager fragmentManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,8 +195,9 @@ public class MainActivity extends AppCompatActivity {
          fragmentManager = getSupportFragmentManager();
         UpdateChecker updateChecker=new UpdateChecker(this,MainActivity.this);
         updateChecker.execute();
-
     }
+
+
     public boolean checkPermissions() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
         return result == PackageManager.PERMISSION_GRANTED;
@@ -229,6 +229,12 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
 
             if (resultData != null) {
+                int currentOrientation = getResources().getConfiguration().orientation;
+                if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                } else {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+                }
                 savehashMap.clear();
                 myUri = resultData.getData();
                 skip=0;
@@ -254,8 +260,10 @@ public class MainActivity extends AppCompatActivity {
                 Button saveButton = findViewById(R.id.savebutton);
                 saveButton.setVisibility(View.VISIBLE);
 
+                scrollView.setVerticalScrollBarEnabled(true);
                 scrollView.setScrollbarFadingEnabled(false);
                 scrollView.setVisibility(View.VISIBLE);
+
                 View themecontainer = findViewById(R.id.themecontainer);
                 themecontainer.setVisibility(View.INVISIBLE);
                 tableLayout.removeAllViews();
@@ -296,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //read more from file when  bottom of scroll view is reached
                         scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                            if (!scrollView.canScrollVertically(1)) {
+                            if (!scrollView.canScrollVertically(1) ) {
                                 readFromFile.start();
                             }
                         });
@@ -401,7 +409,7 @@ return super.onOptionsItemSelected(item);
     public boolean onPrepareOptionsMenu(Menu menu) {
 
         MenuItem layoutsettings = menu.findItem(R.id.showcolumnpopup);
-        if (myUri!=null)
+        if (tableLayout!=null)
             layoutsettings.setVisible(true);
         return super.onPrepareOptionsMenu(menu);
     }
