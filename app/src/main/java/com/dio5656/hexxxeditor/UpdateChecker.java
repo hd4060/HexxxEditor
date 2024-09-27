@@ -33,7 +33,7 @@ class UpdateChecker extends AsyncTask<Void, Void, String> {
 
         try {
             //get the HTML document
-            Document document = Jsoup.connect("https://github.com/dio5656/HexxxEditor/blob/master/README.md").get();
+            Document document = Jsoup.connect("https://github.com/hd4060/HexxxEditor/blob/master/README.md").get();
           //  // System.out.println("doc"+document);
           //  Element element = document.select("#user-content-version").first();
             Element element = document.getElementById("user-content-version");
